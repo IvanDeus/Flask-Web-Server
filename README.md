@@ -6,6 +6,6 @@ python 3
 `pip install flask`
 Edit your flask_web_server_cfg.py
 ## Run
-`pythhon flask_web_server.py`
+`python flask_web_server.py`
 
 2025 [ivan deus]
