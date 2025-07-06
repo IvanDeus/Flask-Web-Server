@@ -60,7 +60,7 @@ project_folder/
 ├── static/
 │   ├── index.html
 │   └── style.css
-└── flask_web_server_cfg.log  (generated automatically)
+└── flask_web_server.log  (generated automatically)
 ```
 
 ---
