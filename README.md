@@ -27,6 +27,7 @@ It serves static files from the `/static` directory and can be run on **Windows*
    pip install flask
    git clone https://github.com/IvanDeus/Flask-Web-Server.git
    cd Flask-Web-Server
+   mkdir static
    ```
 
 2. **Configure Settings:**
