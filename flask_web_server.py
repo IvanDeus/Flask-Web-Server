@@ -1,7 +1,7 @@
 # flask_web_server.py // ivan deus 2025
 import logging
 from flask import Flask
-from flask_web_server_cfg import WPORT, DEBUG, LOGFILE
+from flask_web_server_cfg import HOSST, WPORT, DEBUG, LOGFILE
 app = Flask(__name__)
 # Configure logging
 # Log level based on DEBUG flag
