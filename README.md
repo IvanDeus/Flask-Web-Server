@@ -90,4 +90,4 @@ When `DEBUG=True`, logs are also printed to the console.
 
 ---
 
-2025 [ivan deus]
+2025 [ ivan deus ]
