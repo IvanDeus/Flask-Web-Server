@@ -1,8 +1,7 @@
-# ivan deus 2025
+# flask_web_server.py // ivan deus 2025
 import logging
 from flask import Flask
 from flask_web_server_cfg import WPORT, DEBUG, LOGFILE
-
 app = Flask(__name__)
 # Configure logging
 # Log level based on DEBUG flag
@@ -11,7 +10,7 @@ logging.basicConfig(
     format='%(levelname)s: %(message)s',
     level=logging.INFO if not DEBUG else logging.DEBUG 
 )
-# Also log to console (especially useful during development)
+# Also log to console (useful during development)
 if DEBUG:
     logging.getLogger().addHandler(logging.StreamHandler())
 # Main web page
@@ -22,4 +21,4 @@ def index():
 # Run flask web app   
 if __name__ == '__main__':
     logging.info("Starting Flask web server...")
-    app.run(host='127.0.0.1', port=WPORT, debug=DEBUG)
+    app.run(host=HOST, port=WPORT, debug=DEBUG)
