@@ -21,7 +21,7 @@ It serves static files from the `/static` directory and can be run on **Windows*
    source my-v-env/bin/activate
    ```
    
-1. **Install Flask:**
+1. **Install:**
 
    ```bash
    pip install flask
