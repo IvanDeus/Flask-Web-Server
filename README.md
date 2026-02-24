@@ -58,6 +58,11 @@ By default, the server will start on port `1555`. You can access it via:
 http://localhost:1555/
 ```
 
+For production use PM2 service (with Virtual Environment):
+```bash
+pm2 start flask_web_server.py --interpreter /home/user/my-v-env/bin/python3
+```
+
 ---
 
 ## 📁 Example File Structure
