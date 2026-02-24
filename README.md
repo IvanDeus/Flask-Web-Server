@@ -90,14 +90,6 @@ tail -f flask_web_server.log
 ```
 ---
 
-## 🧪 Customization Tips
-
-- Change `WPORT` to use a different port.
-- Set `DEBUG=True` for development mode with live reload and detailed error pages.
-- Modify the main route (`'/'`) in `flask_web_server.py` to serve a custom homepage.
-
----
-
 ## ✅ Tested On
 
 - Windows
