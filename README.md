@@ -55,7 +55,7 @@ python flask_web_server.py
 By default, the server will start on port `1555`. You can access it via:
 
 ```
-http://127.0.0.1:1555/
+http://localhost:1555/
 ```
 
 ---
