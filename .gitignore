@@ -1,3 +1,4 @@
 # ignore config file for security
 __app.py
 __pycache__/
+static/
