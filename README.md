@@ -33,6 +33,7 @@ It serves static files from the `/static` directory and can be run on **Windows*
 2. **Configure Settings:**
 
    - Edit `flask_web_server_cfg.py` to set:
+     - Web server IP address (`HOST`)
      - Web server port (`WPORT`)
      - Debug mode (`DEBUG`)
      - Log file path (`LOGFILE`) *(optional)*
