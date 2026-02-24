@@ -3,7 +3,6 @@ import logging
 from flask import Flask
 from flask_web_server_cfg import HOST, WPORT, DEBUG, LOGFILE
 app = Flask(__name__)
-# Configure logging
 # Log level based on DEBUG flag
 logging.basicConfig(
     filename=LOGFILE,
