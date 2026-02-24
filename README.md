@@ -14,6 +14,13 @@ It serves static files from the `/static` directory and can be run on **Windows*
 
 ## ⚙️ Setup Instructions
 
+0. **Setup Virtual Environment (optional):**
+
+   ```bash
+   python3 -m venv my-v-env
+   source my-v-env/bin/activate
+   ```
+   
 1. **Install Flask:**
 
    ```bash
