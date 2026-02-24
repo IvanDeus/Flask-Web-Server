@@ -83,8 +83,10 @@ project_folder/
 ## 📝 Logging
 
 The server logs events such as startup and route access into the file defined by `LOGFILE` in your config.  
-When `DEBUG=True`, logs are also printed to the console.
-
+When `DEBUG=True`, logs are also printed to the console. To check logs:
+```
+tail -f flask_web_server.log
+```
 ---
 
 ## 🧪 Customization Tips
