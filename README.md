@@ -1,7 +1,7 @@
 # 🌐 Flask Web Server
 
 A simple, cross-platform, universal web server built using Flask library.  
-It serves static files from the `/static` directory and can be run on **Windows**, **Linux**, **macOS**, **Android** (with Python support), and supports ngrok tunnel!
+It serves static files from the `/static` directory and can be run on **Windows**, **Linux**, **macOS**, **Android** (with Python support), and can be publicly accessible via ngrok!
 
 ---
 
@@ -9,6 +9,7 @@ It serves static files from the `/static` directory and can be run on **Windows*
 
 - Python 3.x
 - Flask
+- ngrok (optional)
 
 ---
 
