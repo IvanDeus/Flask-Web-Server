@@ -95,7 +95,9 @@ Without `NGROK_AUTHTOKEN` the server behaves exactly as above. Set it and the tu
 
 ```bash
 pip install ngrok
-NGROK_AUTHTOKEN=xxxx FWS_NGROK_DOMAIN=fitting-sturgeon-dynamic.ngrok-free.app python3 flask_web_server.py
+```
+```
+NGROK_AUTHTOKEN=xxxx python3 flask_web_server.py
 ```
 ```
 INFO: Ngrok tunnel: https://fitting-sturgeon-dynamic.ngrok-free.app
