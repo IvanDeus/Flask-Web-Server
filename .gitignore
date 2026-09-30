@@ -3,3 +3,4 @@ __app.py
 __pycache__/
 static/
 *.log
+.qoder/

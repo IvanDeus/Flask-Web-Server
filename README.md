@@ -32,16 +32,32 @@ It serves static files from the `/static` directory and can be run on **Windows*
 
 2. **Configure Settings:**
 
-   - Edit `flask_web_server_cfg.py` to set:
-     - Web server IP address (`HOST`)
-     - Web server port (`WPORT`)
-     - Debug mode (`DEBUG`)
-     - Log file path (`LOGFILE`) *(optional)*
+   Every setting comes from a `FWS_*` environment variable, falling back to the built-in default when unset.
+
+   | Env variable | Default | Meaning |
+   |---|---|---|
+   | `FWS_HOST` | `0.0.0.0` | Address to bind (`0.0.0.0` = reachable from other machines) |
+   | `FWS_PORT` | `1555` | TCP port |
+   | `FWS_DEBUG` | off | Debug logs + Werkzeug debugger; accepts `1/true/yes/on` |
+   | `FWS_LOGFILE` | `flask_web_server.log` | Log file path *(relative to the current directory)* |
+   | `FWS_STATIC` | `<script dir>/static` | Directory to serve |
+
+   Paths work as follows:
+
+   - The default `static/` is anchored to the directory containing `flask_web_server.py`, **not** to where you launch the command, so `python /path/to/Flask-Web-Server/flask_web_server.py` still serves `/path/to/Flask-Web-Server/static`.
+   - A `FWS_STATIC` value is converted to an absolute path at startup: a relative value such as `FWS_STATIC=./site` resolves against the directory you launch from, and an absolute value (`FWS_STATIC=/srv/mysite/static`) is used as given.
+   - `FWS_LOGFILE` is not rewritten, so a relative log path lands in the directory you launch from.
+
+   Export the variables per deployment:
+
+   ```bash
+   FWS_PORT=8080 FWS_HOST=127.0.0.1 python3 flask_web_server.py
+   ```
 
 3. **Place Files:**
 
    - Put any static files (HTML, CSS, JS, images, etc.) in the `static/` directory.
-   - These will be served at `http://localhost:<port>/filename.ext`
+   - `static/index.html` is served at `/`; everything else under `/static/`, e.g. `http://localhost:<port>/static/style.css`.
 
 ---
 
@@ -53,7 +69,13 @@ In your terminal or command prompt:
 python flask_web_server.py
 ```
 
-By default, the server will start on port `1555`. You can access it via:
+By default, the server will start on port `1555` and print the address it is reachable on:
+
+```
+IP:PORT 192.168.1.42:1555 (also reachable as 127.0.0.1:1555)
+```
+
+From the same machine you can use:
 
 ```
 http://localhost:1555/
@@ -72,7 +94,6 @@ pm2 start flask_web_server.py --interpreter /home/user/my-v-env/bin/python3
 project_folder/
 │
 ├── flask_web_server.py
-├── flask_web_server_cfg.py
 ├── static/
 │   ├── index.html
 │   └── style.css
@@ -83,8 +104,7 @@ project_folder/
 
 ## 📝 Logging
 
-The server logs events such as startup and route access into the file defined by `LOGFILE` in your config.  
-When `DEBUG=True`, logs are also printed to the console. To check logs:
+The server logs startup and every incoming request (method, path, status, client IP) to both the file defined by `FWS_LOGFILE` and the console, so a running server is readable without `tail`. To follow the file instead:
 ```
 tail -f flask_web_server.log
 ```
