@@ -25,6 +25,7 @@ HOST = _env('HOST', '0.0.0.0')
 WPORT = _as_port(_env('PORT', '1555'))
 DEBUG = _as_bool(_env('DEBUG', ''))
 LOGFILE = _env('LOGFILE', 'flask_web_server.log')
+NGROK_DOMAIN = _env('NGROK_DOMAIN', '')
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 # send_file resolves a relative directory against app.root_path, not cwd, so pin it at startup
 STATIC_DIR = os.path.abspath(_env('STATIC', os.path.join(APP_ROOT, 'static')))
@@ -40,6 +41,28 @@ def _local_ip():
         return '127.0.0.1'
     finally:
         probe.close()
+
+
+def connect_ngrok():
+    # Ngrok is optional: only touched when NGROK_AUTHTOKEN is set, so the import stays inside
+    if not os.environ.get('NGROK_AUTHTOKEN'):
+        return
+    try:
+        import ngrok
+    except ImportError:
+        logging.warning("NGROK_AUTHTOKEN is set but the 'ngrok' package is missing (pip install ngrok); continuing without a tunnel")
+        return
+    kwargs = {'authtoken_from_env': True}
+    if NGROK_DOMAIN:
+        kwargs['domain'] = NGROK_DOMAIN
+    try:
+        forwarder = ngrok.forward(f'localhost:{WPORT}', **kwargs)
+    except Exception as err:
+        # ngrok reports its own failures as a tuple, so str() it instead of letting a traceback out
+        logging.error(f"Ngrok tunnel failed: {err} -- continuing without a tunnel")
+        return
+    logging.info(f"Ngrok tunnel: {forwarder.url()}")
+
 
 # Flask's own /static rule would otherwise take precedence over send_static below
 app = Flask(__name__, static_folder=None)
@@ -77,4 +100,5 @@ if __name__ == '__main__':
         print(f"IP:PORT {_local_ip()}:{WPORT} (also reachable as 127.0.0.1:{WPORT})")
     else:
         print(f"IP:PORT {HOST}:{WPORT}")
+    connect_ngrok()
     app.run(host=HOST, port=WPORT, debug=DEBUG)

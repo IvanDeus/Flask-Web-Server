@@ -32,7 +32,7 @@ It serves static files from the `/static` directory and can be run on **Windows*
 
 2. **Configure Settings:**
 
-   Every setting comes from a `FWS_*` environment variable, falling back to the built-in default when unset.
+   Every setting comes from a `FWS_*` environment variable, falling back to the built-in default when unset. The one exception is `NGROK_AUTHTOKEN`, which keeps ngrok's own name so the tunnel can read it directly.
 
    | Env variable | Default | Meaning |
    |---|---|---|
@@ -41,6 +41,8 @@ It serves static files from the `/static` directory and can be run on **Windows*
    | `FWS_DEBUG` | off | Debug logs + Werkzeug debugger; accepts `1/true/yes/on` |
    | `FWS_LOGFILE` | `flask_web_server.log` | Log file path *(relative to the current directory)* |
    | `FWS_STATIC` | `<script dir>/static` | Directory to serve |
+   | `NGROK_AUTHTOKEN` | unset | If set (and `pip install ngrok`), also expose the server through an ngrok tunnel |
+   | `FWS_NGROK_DOMAIN` | unset | Reserved/standard ngrok domain to bind, e.g. `fitting-sturgeon-dynamic.ngrok-free.app` |
 
    Paths work as follows:
 
@@ -84,6 +86,18 @@ http://localhost:1555/
 For production use PM2 service (with Virtual Environment):
 ```bash
 pm2 start flask_web_server.py --interpreter /home/user/my-v-env/bin/python3
+```
+
+### Public access via ngrok (optional)
+
+Without `NGROK_AUTHTOKEN` the server behaves exactly as above. Set it and the tunnel starts with the server, logging its public URL:
+
+```bash
+pip install ngrok
+NGROK_AUTHTOKEN=xxxx FWS_NGROK_DOMAIN=fitting-sturgeon-dynamic.ngrok-free.app python3 flask_web_server.py
+```
+```
+INFO: Ngrok tunnel: https://fitting-sturgeon-dynamic.ngrok-free.app
 ```
 
 ---
